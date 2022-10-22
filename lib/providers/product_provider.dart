@@ -11,4 +11,12 @@ class ProductProvider extends ChangeNotifier{
     final categoryModel = CategoryModel(name: categoryName);
     return DbHelper.addNewCategory(categoryModel);
   }
+
+  getAllProduct(){
+    DbHelper.getAllCategories().listen((event) {
+      categoryList = List.generate(event.docs.length, (index) =>
+      CategoryModel.fromMap(event.docs[index].data()));
+      notifyListeners();
+    });
+  }
 }

@@ -5,7 +5,9 @@ import 'package:ecom_admin/pages/product_page.dart';
 import 'package:ecom_admin/pages/report_page.dart';
 import 'package:ecom_admin/pages/settings_page.dart';
 import 'package:ecom_admin/pages/user_page.dart';
+import 'package:ecom_admin/providers/product_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/dashbord_item.dart';
 
 class DashbordPage extends StatelessWidget {
@@ -15,6 +17,7 @@ class DashbordPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<ProductProvider>(context,listen: false).getAllProduct();
     return Scaffold(
       appBar: AppBar(
         title: Text('Dashbord'),

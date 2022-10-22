@@ -18,4 +18,13 @@ class CategoryModel{
       categoryAvailable : available,
     };
   }
+  factory CategoryModel.fromMap(Map<String, dynamic> map){
+    return CategoryModel(
+      id: map[categoryId],
+      name: map[categoryName],
+      available: map[categoryAvailable],
+      productCount: map[categoryProductCount]
+    );
+  }
+
 }
