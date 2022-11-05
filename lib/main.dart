@@ -2,6 +2,7 @@ import 'package:ecom_admin/pages/category_page.dart';
 import 'package:ecom_admin/pages/dashbord_page.dart';
 import 'package:ecom_admin/pages/launcher_page.dart';
 import 'package:ecom_admin/pages/login_page.dart';
+import 'package:ecom_admin/pages/new_product_page.dart';
 import 'package:ecom_admin/pages/order_page.dart';
 import 'package:ecom_admin/pages/product_page.dart';
 
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-     // debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
         UserPage.routeName : (context) => UserPage(),
         SettingsPage.routeName : (context) => SettingsPage(),
         ReportPage.routeName : (context) => ReportPage(),
+        NewProductPage.routeName : (context) => NewProductPage(),
       },
     );
   }

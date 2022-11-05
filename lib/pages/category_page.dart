@@ -17,6 +17,7 @@ class CategoryPage extends StatelessWidget {
         onPressed: () {
           _showAddCategoryDialog(context);
         },
+        child: Icon(Icons.add),
       ),
       body: Consumer<ProductProvider>(builder: (context, provider, child) =>
       provider.categoryList.isEmpty ?
