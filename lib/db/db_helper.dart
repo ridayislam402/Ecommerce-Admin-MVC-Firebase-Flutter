@@ -27,6 +27,10 @@ class DbHelper {
     return _db.collection(collectionCategory).snapshots();
   }
 
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getAllProduct(){
+    return _db.collection(collectionProduct).snapshots();
+  }
+
   static Future<void> addProduct(
       ProductModel productModel,
       PurchaseModel purchaseModel,

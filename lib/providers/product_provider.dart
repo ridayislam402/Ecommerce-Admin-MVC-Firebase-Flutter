@@ -10,20 +10,29 @@ import '../models/category_model.dart';
 
 class ProductProvider extends ChangeNotifier {
   List<CategoryModel> categoryList = [];
-
+  List<ProductModel> productList = [];
 
   Future<void> addCategory(String categoryName) {
     final categoryModel = CategoryModel(name: categoryName);
     return DbHelper.addNewCategory(categoryModel);
   }
 
-  getAllProduct() {
+  getAllCategories() {
     DbHelper.getAllCategories().listen((event) {
       categoryList = List.generate(event.docs.length, (index) =>
           CategoryModel.fromMap(event.docs[index].data()));
       notifyListeners();
     });
   }
+
+  getAllProduct() {
+    DbHelper.getAllProduct().listen((event) {
+      productList = List.generate(event.docs.length, (index) =>
+          ProductModel.fromMap(event.docs[index].data()));
+      notifyListeners();
+    });
+  }
+  
 
   Future<String> uploadImage(String path) async {
     final imageName = DateTime
@@ -46,4 +55,6 @@ class ProductProvider extends ChangeNotifier {
   CategoryModel getCategoryModelByCatName(String name){
     return categoryList.firstWhere((element) => element.name == name);
   }
+  
+  
 }
