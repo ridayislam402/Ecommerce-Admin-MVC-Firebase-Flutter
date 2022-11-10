@@ -4,6 +4,7 @@ import 'package:ecom_admin/pages/launcher_page.dart';
 import 'package:ecom_admin/pages/login_page.dart';
 import 'package:ecom_admin/pages/new_product_page.dart';
 import 'package:ecom_admin/pages/order_page.dart';
+import 'package:ecom_admin/pages/product_details_page.dart';
 import 'package:ecom_admin/pages/product_page.dart';
 
 import 'package:ecom_admin/pages/report_page.dart';
@@ -51,6 +52,9 @@ class MyApp extends StatelessWidget {
         SettingsPage.routeName : (context) => SettingsPage(),
         ReportPage.routeName : (context) => ReportPage(),
         NewProductPage.routeName : (context) => NewProductPage(),
+        ProductDetailsPage.routeName : (context) => ProductDetailsPage(),
+
+
       },
     );
   }

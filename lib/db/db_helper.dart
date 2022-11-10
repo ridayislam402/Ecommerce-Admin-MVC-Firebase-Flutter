@@ -49,4 +49,29 @@ class DbHelper {
     wb.update(catDoc, {categoryProductCount : count});
     return wb.commit();
   }
+
+  static Stream<DocumentSnapshot<Map<String, dynamic>>> getProductById(String id) =>
+      _db.collection(collectionProduct).doc(id).snapshots();
+
+  static Future<void> updateProduct(String id, Map<String, dynamic> map) {
+    return _db.collection(collectionProduct).doc(id)
+        .update(map);
+  }
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getPurchaseByProductId(String id) =>
+      _db.collection(collectionPurchase)
+          .where(purchaseProductId, isEqualTo: id)
+          .snapshots();
+
+  static Future<void> rePurchase(PurchaseModel purchaseModel, CategoryModel catModel, num stock) {
+    final wb = _db.batch();
+    final doc = _db.collection(collectionPurchase).doc();
+    purchaseModel.id = doc.id;
+    wb.set(doc, purchaseModel.toMap());
+    final catDoc = _db.collection(collectionCategory).doc(catModel.id);
+    wb.update(catDoc, {categoryProductCount : catModel.productCount});
+    final proDoc = _db.collection(collectionProduct).doc(purchaseModel.productId);
+    wb.update(proDoc, {productStock : (stock + purchaseModel.quantity)});
+    return wb.commit();
+  }
 }

@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecom_admin/models/date_model.dart';
 import 'package:ecom_admin/models/product_model.dart';
 import 'package:ecom_admin/models/purchase_model.dart';
+import 'package:ecom_admin/pages/category_page.dart';
 import 'package:ecom_admin/providers/product_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -59,10 +60,17 @@ class _NewProductPageState extends State<NewProductPage> {
         title: Text('New Product'),
         actions: [
           TextButton(onPressed: _saveProduct
-          , child: Text('Save',
-            style: TextStyle(color: Colors.white)))
+          , child: Row(
+            children: [
+              Text('Save', style: TextStyle(color: Colors.white)),
+              Icon(Icons.upload_outlined,color: Colors.white,)
+            ],
+          )),
+          
         ],
       ),
+      floatingActionButton: FloatingActionButton(onPressed: () => Navigator.pushNamed(context, CategoryPage.routeName),
+      child: Text('Ctg +')),
       body: SingleChildScrollView(
         child: Form(
           key: formkey,
@@ -245,7 +253,8 @@ class _NewProductPageState extends State<NewProductPage> {
                       SizedBox(width: 10,),
                       TextButton.icon(
                         onPressed: () {
-                          
+                          _imageSource = ImageSource.gallery;
+                          _getImage();
                         },
                         icon: Icon(Icons.photo),
                         label: Text('Gallery'),
