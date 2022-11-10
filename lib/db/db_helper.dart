@@ -9,6 +9,12 @@ class DbHelper {
   static const String collectionCategory = 'Categories';
   static const String collectionProduct = 'Products';
   static const String collectionPurchase = 'Purchase';
+  static const String collectionUser = 'User';
+  static const String collectionOrder = 'Order';
+  static const String collectionOrderDetails = 'OrderDetails';
+  static const String collectionOrderSettings = 'Settings';
+  static const String documentOrderConstant = 'OrderConstant';
+
 
   static FirebaseFirestore _db = FirebaseFirestore.instance;
 
@@ -74,4 +80,7 @@ class DbHelper {
     wb.update(proDoc, {productStock : (stock + purchaseModel.quantity)});
     return wb.commit();
   }
+
+  static Stream<DocumentSnapshot<Map<String, dynamic>>> getOrderConstants() =>
+      _db.collection(collectionOrderSettings).doc(documentOrderConstant).snapshots();
 }
