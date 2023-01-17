@@ -90,7 +90,8 @@ class ProductDetailsPage extends StatelessWidget {
                     trailing: IconButton(
                       onPressed: () {
                         showUpdateDialog(
-                          context: context, desc: product.salesPrice.toString(), onSave: (value) {
+                          context: context, desc: product.salesPrice.toString(),
+                          onSave: (value) {
                           provider.updateProduct(product.id!, productSalesPrice, num.parse(value));
                         },);
                       },

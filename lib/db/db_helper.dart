@@ -83,4 +83,12 @@ class DbHelper {
 
   static Stream<DocumentSnapshot<Map<String, dynamic>>> getOrderConstants() =>
       _db.collection(collectionOrderSettings).doc(documentOrderConstant).snapshots();
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getAllUsers() =>
+      _db.collection(collectionUser).snapshots();
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getAllOrders() {
+    return _db.collection(collectionOrder)
+        .snapshots();
+  }
 }

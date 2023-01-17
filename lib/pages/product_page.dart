@@ -28,6 +28,7 @@ class ProductPage extends StatelessWidget {
                 title: Text(products.name!),
                 trailing: Text('stock : ${products.stock}'),
                 subtitle: Text(products.category),
+
               );
             },
            )

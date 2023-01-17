@@ -59,18 +59,23 @@ class _NewProductPageState extends State<NewProductPage> {
       appBar: AppBar(
         title: Text('New Product'),
         actions: [
-          TextButton(onPressed: _saveProduct
-          , child: Row(
+          TextButton(onPressed:() => Navigator.pushNamed(context, CategoryPage.routeName),
+           child: Row(
             children: [
-              Text('Save', style: TextStyle(color: Colors.white)),
-              Icon(Icons.upload_outlined,color: Colors.white,)
+              Text('Add New Category', style: TextStyle(color: Colors.white)),
+             // Icon(Icons.upload_outlined,color: Colors.white,)
             ],
           )),
           
         ],
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () => Navigator.pushNamed(context, CategoryPage.routeName),
-      child: Text('Ctg +')),
+      floatingActionButton:
+      FloatingActionButton(
+        onPressed: () => _saveProduct,
+
+      child: Icon(Icons.upload_outlined,color: Colors.white,) ,
+
+      ),
       body: SingleChildScrollView(
         child: Form(
           key: formkey,

@@ -6,9 +6,12 @@ import 'package:ecom_admin/pages/report_page.dart';
 import 'package:ecom_admin/pages/settings_page.dart';
 import 'package:ecom_admin/pages/user_page.dart';
 import 'package:ecom_admin/providers/product_provider.dart';
+import 'package:ecom_admin/utils/contents.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/dashbord_item.dart';
+import '../providers/order_provider.dart';
+import '../providers/user_provider.dart';
 
 class DashbordPage extends StatelessWidget {
   static const String routeName = '/dashbord';
@@ -19,7 +22,11 @@ class DashbordPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Provider.of<ProductProvider>(context,listen: false).getAllCategories();
     Provider.of<ProductProvider>(context,listen: false).getAllProduct();
+    Provider.of<UserProvider>(context, listen: false).getAllUsers();
+    Provider.of<OrderProvider>(context, listen: false).getAllOrders();
+
     return Scaffold(
+      backgroundColor: appBarColor,
       appBar: AppBar(
         title: Text('Dashbord'),
       ),

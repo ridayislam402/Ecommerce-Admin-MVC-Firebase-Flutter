@@ -17,6 +17,7 @@ class DashboardItemView extends StatelessWidget {
       },
       child: Card(
         elevation: 5,
+
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
