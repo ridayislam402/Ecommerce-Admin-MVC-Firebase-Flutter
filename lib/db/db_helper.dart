@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../models/category_model.dart';
+import '../models/order_constants_model.dart';
 import '../models/product_model.dart';
 import '../models/purchase_model.dart';
 
@@ -14,6 +15,8 @@ class DbHelper {
   static const String collectionOrderDetails = 'OrderDetails';
   static const String collectionOrderSettings = 'Settings';
   static const String documentOrderConstant = 'OrderConstant';
+ static const String orderStatusKey = 'orderStatus';
+
 
 
   static FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -91,4 +94,22 @@ class DbHelper {
     return _db.collection(collectionOrder)
         .snapshots();
   }
+
+  static Future<void> addOrderConstants(OrderConstantsModel model) =>
+      _db.collection(collectionOrderSettings).doc(documentOrderConstant)
+          .set(model.toMap());
+
+  static Future<QuerySnapshot<Map<String, dynamic>>> getOrderDetails(String orderId) {
+    return _db.collection(collectionOrder)
+        .doc(orderId)
+        .collection(collectionOrderDetails)
+        .get();
+  }
+
+  static Future<void> updateOrderStatus(String orderId, String status) =>
+      _db.collection(collectionOrder)
+          .doc(orderId)
+          .update({orderStatusKey : status});
+
+
 }

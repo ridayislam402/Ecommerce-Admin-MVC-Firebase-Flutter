@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/order_provider.dart';
 import '../utils/contents.dart';
+import 'order_list_page.dart';
 
 class OrderPage extends StatelessWidget {
   static const String routeName = '/order';
@@ -54,8 +55,10 @@ class OrderPage extends StatelessWidget {
                       ],
                     ),
                     TextButton(
-                      onPressed: () {
-                       },
+                      onPressed: () =>
+                          Navigator.pushNamed(
+                              context, OrderListPage.routeName,
+                              arguments: OrderFilter.TODAY),
                       child: const Text('View All'),
                     )
                   ],
@@ -99,9 +102,10 @@ class OrderPage extends StatelessWidget {
                       ],
                     ),
                     TextButton(
-                      onPressed: () {
-
-                      },
+                      onPressed: () =>
+                          Navigator.pushNamed(
+                              context, OrderListPage.routeName,
+                              arguments: OrderFilter.YESTERDAY),
                       child: const Text('View All'),
                     )
                   ],
@@ -145,9 +149,10 @@ class OrderPage extends StatelessWidget {
                       ],
                     ),
                     TextButton(
-                      onPressed: () {
-
-                      },
+                      onPressed: () =>
+                          Navigator.pushNamed(
+                              context, OrderListPage.routeName,
+                              arguments: OrderFilter.SEVEN_DAYS),
                       child: const Text('View All'),
                     )
                   ],
@@ -191,9 +196,10 @@ class OrderPage extends StatelessWidget {
                       ],
                     ),
                     TextButton(
-                      onPressed: () {
-
-                      },
+                      onPressed: () =>
+                          Navigator.pushNamed(
+                              context, OrderListPage.routeName,
+                              arguments: OrderFilter.THIS_MONTH),
                       child: const Text('View All'),
                     )
                   ],
@@ -237,9 +243,10 @@ class OrderPage extends StatelessWidget {
                       ],
                     ),
                     TextButton(
-                      onPressed: () {
-
-                      },
+                      onPressed: () =>
+                          Navigator.pushNamed(
+                              context, OrderListPage.routeName,
+                              arguments: OrderFilter.ALL_TIME),
                       child: const Text('View All'),
                     )
                   ],

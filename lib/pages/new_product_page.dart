@@ -71,7 +71,7 @@ class _NewProductPageState extends State<NewProductPage> {
       ),
       floatingActionButton:
       FloatingActionButton(
-        onPressed: () => _saveProduct,
+        onPressed: _saveProduct,
 
       child: Icon(Icons.upload_outlined,color: Colors.white,) ,
 
@@ -79,196 +79,200 @@ class _NewProductPageState extends State<NewProductPage> {
       body: SingleChildScrollView(
         child: Form(
           key: formkey,
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 5,
-              ),
-              TextFormField(
-                controller: productNameController,
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    label: Text('Product Name'),
-                    prefixIcon: Icon(Icons.email),
-                    filled: true),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'This field must not be empty';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Flexible(
-                    child: TextFormField(
-                      keyboardType: TextInputType.number,
-                      controller: productPurchasePriceController,
-                      decoration: const InputDecoration(
-                          labelText: 'Purchase price',
-                          prefixIcon: Icon(Icons.attach_money),
-                          border: OutlineInputBorder()),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Flexible(
-                    child: TextFormField(
-                      keyboardType: TextInputType.number,
-                      controller: productSalePriceController,
-                      decoration: const InputDecoration(
-                          labelText: 'Sale price',
-                          prefixIcon: Icon(Icons.price_change),
-                          border: OutlineInputBorder()),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  Flexible(
-                    child: TextFormField(
-                      keyboardType: TextInputType.number,
-                      controller: productQuantityController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Quantity',
-                        prefixIcon: Icon(Icons.production_quantity_limits),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 5,
+                ),
+                TextFormField(
+                  controller: productNameController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      label: Text('Product Name'),
+                      prefixIcon: Icon(Icons.email),
+                      filled: true),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'This field must not be empty';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Flexible(
+                      child: TextFormField(
+                        keyboardType: TextInputType.number,
+                        controller: productPurchasePriceController,
+                        decoration: const InputDecoration(
+                            labelText: 'Purchase price',
+                            prefixIcon: Icon(Icons.attach_money),
+                            border: OutlineInputBorder()),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Flexible(
-                    child: InputDecorator(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Flexible(
+                      child: TextFormField(
+                        keyboardType: TextInputType.number,
+                        controller: productSalePriceController,
+                        decoration: const InputDecoration(
+                            labelText: 'Sale price',
+                            prefixIcon: Icon(Icons.price_change),
+                            border: OutlineInputBorder()),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Flexible(
+                      child: TextFormField(
+                        keyboardType: TextInputType.number,
+                        controller: productQuantityController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Quantity',
+                          prefixIcon: Icon(Icons.production_quantity_limits),
                         ),
                       ),
-                      child: DropdownButtonHideUnderline(
-                        child: Consumer<ProductProvider>(
-                          builder: (context, provider, child) =>
-                              DropdownButtonFormField(
-                            hint: Text('Select'),
-                            icon: Icon(Icons.arrow_drop_down),
-                            value: _category,
-                            items: provider.categoryList
-                                .map((model) => DropdownMenuItem<String>(
-                                    value: model.name, child: Text(model.name!)))
-                                .toList(),
-                            onChanged: (val) {
-                              _category = val;
-                            },
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Flexible(
+                      child: InputDecorator(
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            )),
+                        child: DropdownButtonHideUnderline(
+                          child: Consumer<ProductProvider>(
+                            builder: (context, provider, child) =>
+                                DropdownButtonFormField(
+                              hint: Text('Select'),
+                              icon: Icon(Icons.arrow_drop_down),
+                              value: _category,
+                              items: provider.categoryList
+                                  .map((model) => DropdownMenuItem<String>(
+                                      value: model.name, child: Text(model.name!)))
+                                  .toList(),
+                              onChanged: (val) {
+                                _category = val;
+                              },
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                keyboardType: TextInputType.multiline,
-                controller: productDescriptionController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Product Description',
-                  prefixIcon: Icon(Icons.description),
-                ),
-                minLines: 2,
-                maxLines: 5,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'This field must not be empty!';
-                  } else {
-                    return null;
-                  }
-                },
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Card(
-                child: Row(
-                  children: [
-                    TextButton(
-                        onPressed: () => _selectDate(),
-                        child: Text('Select purchase Date')),
-                    Chip(
-                        label: Text(_productPurchaseDate == null
-                            ? 'No Data Chosen'
-                            : getFormattedDataTime(
-                                _productPurchaseDate!, 'dd/MM/yyyy')))
                   ],
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                    ),
-                    elevation: 5,
-                    child: Padding(
-                      padding: EdgeInsets.all(5),
-                      child: _localImagePath == null
-                          ? const Icon(
-                              Icons.photo,
-                              size: 110,
-                            )
-                          : Image.file(
-                              File(_localImagePath!),
-                              height: 200,
-                              width: double.infinity,
-                              fit: BoxFit.contain,
-                            ),
-                    ),
+                const SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  keyboardType: TextInputType.multiline,
+                  controller: productDescriptionController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Product Description',
+                    prefixIcon: Icon(Icons.description),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  minLines: 2,
+                  maxLines: 5,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'This field must not be empty!';
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Card(
+                  child: Row(
                     children: [
-                      TextButton.icon(
-                        onPressed: () {
-                          _imageSource = ImageSource.camera;
-                          _getImage();
-                        },
-                        icon: Icon(Icons.camera),
-                        label: Text('Camera'),
-                      ),
-                      SizedBox(width: 10,),
-                      TextButton.icon(
-                        onPressed: () {
-                          _imageSource = ImageSource.gallery;
-                          _getImage();
-                        },
-                        icon: Icon(Icons.photo),
-                        label: Text('Gallery'),
-                      )
+                      TextButton(
+                          onPressed: () => _selectDate(),
+                          child: Text('Select purchase Date')),
+                      Chip(
+                          label: Text(_productPurchaseDate == null
+                              ? 'No Data Chosen'
+                              : getFormattedDataTime(
+                                  _productPurchaseDate!, 'dd/MM/yyyy')))
                     ],
-                  )
-                ],
-              )
-            ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
+                      ),
+                      elevation: 5,
+                      child: Padding(
+                        padding: EdgeInsets.all(5),
+                        child: _localImagePath == null
+                            ? const Icon(
+                                Icons.photo,
+                                size: 110,
+                              )
+                            : Image.file(
+                                File(_localImagePath!),
+                                height: 200,
+                                width: double.infinity,
+                                fit: BoxFit.contain,
+                              ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextButton.icon(
+                          onPressed: () {
+                            _imageSource = ImageSource.camera;
+                            _getImage();
+                          },
+                          icon: Icon(Icons.camera),
+                          label: Text('Camera'),
+                        ),
+                        SizedBox(width: 10,),
+                        TextButton.icon(
+                          onPressed: () {
+                            _imageSource = ImageSource.gallery;
+                            _getImage();
+                          },
+                          icon: Icon(Icons.photo),
+                          label: Text('Gallery'),
+                        )
+                      ],
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
