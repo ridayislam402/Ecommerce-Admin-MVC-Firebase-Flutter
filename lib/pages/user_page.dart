@@ -17,9 +17,21 @@ class UserPage extends StatelessWidget {
           itemCount: provider.userList.length,
           itemBuilder: (context, index) {
             final user = provider.userList[index];
-            return ListTile(
-              title: Text(user.name ?? 'UnKnown'),
-              subtitle: Text('Registered on ${getFormattedDataTime(user.userCreationTime.toDate(), 'MMM dd, yyyy')}'),
+            return Card(
+              elevation: 5,
+              child: ListTile(
+                title: Text(user.name ?? 'UnKnown'),
+                trailing: Text('Registered on ${getFormattedDataTime(user.userCreationTime.toDate(), 'MMM dd, yyyy')}'),
+                subtitle: user.address != null?Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(user.address!.city),
+                    Text(user.address!.area ?? 'UnKnown'),
+                    Text(user.address!.streetAddress ?? 'UnKnown'),
+                    Text(user.address!.zipCode ?? 'UnKnown'),
+                  ],
+                ):null,
+              ),
             );
           },
         )

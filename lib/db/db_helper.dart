@@ -111,5 +111,7 @@ class DbHelper {
           .doc(orderId)
           .update({orderStatusKey : status});
 
-
+  //User details
+  static Stream<DocumentSnapshot<Map<String, dynamic>>> getUserById(String uid) =>
+      _db.collection(collectionUser).doc(uid).snapshots();
 }

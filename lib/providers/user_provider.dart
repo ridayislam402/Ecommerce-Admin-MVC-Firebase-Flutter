@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../db/db_helper.dart';
@@ -13,4 +14,7 @@ class UserProvider extends ChangeNotifier{
       notifyListeners();
     });
   }
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>> geUserById(String uid) =>
+      DbHelper.getUserById(uid);
 }
